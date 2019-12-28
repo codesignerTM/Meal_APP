@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Button,
-  StyleSheet,
-  Platform
-} from "react-native";
+import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
-import Colors from "../constants/colors";
+import MealItem from "../components/MealItem";
 
 const CategoryMealScreen = props => {
   const catId = props.navigation.getParam("categoryId");
@@ -16,9 +9,14 @@ const CategoryMealScreen = props => {
 
   const renderMealItem = itemData => {
     return (
-      <View>
-        <Text>{itemData.item.title}</Text>
-      </View>
+      <MealItem
+        title={itemData.item.title}
+        onSelectMeal={() => {}}
+        duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        image={itemData.item.imageUrl}
+      />
     );
   };
 
@@ -31,6 +29,7 @@ const CategoryMealScreen = props => {
         data={displayedMeals}
         keyExtractor={(item, index) => item.id}
         renderItem={renderMealItem}
+        style={{ width: "100%" }}
       />
     </View>
   );
