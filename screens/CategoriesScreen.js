@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import CategoryGridTile from "../components/CategoryGridTile";
 
 import { CATEGORIES } from "../data/dummy-data";
@@ -37,9 +31,7 @@ const CategoryScreen = props => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   }
 });
 
