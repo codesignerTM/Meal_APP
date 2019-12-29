@@ -11,7 +11,6 @@ import CategoryGridTile from "../components/CategoryGridTile";
 import { CATEGORIES } from "../data/dummy-data";
 
 const CategoryScreen = props => {
-  console.log(props);
   const renderGridItem = itemData => {
     return (
       <CategoryGridTile
