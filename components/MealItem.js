@@ -4,9 +4,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  ImageBackground,
-  Platform,
-  TouchableNativeFeedback
+  ImageBackground
 } from "react-native";
 
 const MealItem = props => {

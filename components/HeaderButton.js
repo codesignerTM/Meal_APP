@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Platform } from "react-native";
+import { Platform } from "react-native";
 import { HeaderButton } from "react-navigation-header-buttons";
 import { MaterialIcons } from "@expo/vector-icons";
 
