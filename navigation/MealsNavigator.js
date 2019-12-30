@@ -47,39 +47,46 @@ const MealsNavigator = createStackNavigator(
   }
 );
 
-const MealsFavTabNavigator = createBottomTabNavigator(
-  {
-    Meals: {
-      screen: MealsNavigator,
-      navigationOptions: {
-        tabBarIcon: tabInfo => {
-          return (
-            <Ionicons
-              name="md-restaurant"
-              size={25}
-              color={tabInfo.tintColor}
-            />
-          );
-        }
-      }
-    },
-    Favourites: {
-      screen: FavouritesScreen,
-      navigationOptions: {
-        tabBarLabel: "Favourites :)",
-        tabBarIcon: tabInfo => {
-          return (
-            <Ionicons name="ios-heart" size={25} color={tabInfo.tintColor} />
-          );
-        }
-      }
+const tabScreenConfig = {
+  Meals: {
+    screen: MealsNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons name="md-restaurant" size={25} color={tabInfo.tintColor} />
+        );
+      },
+      tabBarColor: Colors.primaryColor
     }
   },
-  {
-    tabBarOptions: {
-      activeTintColor: Colors.secondaryColor
+  Favourites: {
+    screen: FavouritesScreen,
+    navigationOptions: {
+      tabBarLabel: "Favourites :)",
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons name="ios-heart" size={25} color={tabInfo.tintColor} />
+        );
+      },
+      tabBarColor: Colors.secondaryColor
     }
   }
-);
+};
+
+const MealsFavTabNavigator =
+  Platform.OS === "android"
+    ? createMaterialBottomTabNavigator(tabScreenConfig, {
+        activeColor: "white",
+        shifting: true
+        /* barStyle: {  
+          backgroundColor: Colors.primaryColor   //if shifting is false that is how to change background color
+        } */
+      })
+    : createBottomTabNavigator({
+        tabScreenConfig,
+        tabBarOptions: {
+          activeTintColor: Colors.secondaryColor
+        }
+      });
 
 export default createAppContainer(MealsFavTabNavigator);
