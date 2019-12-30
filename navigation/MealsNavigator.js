@@ -16,15 +16,10 @@ import FavouritesScreen from "../screens/FavouritesScreen";
 import FiltersScreen from "../screens/FlitersScreen";
 
 const defaultStackNavigationOptions = {
-  //mode: "modal",
-  //initialRouteName: "MealDetail",
-  defaultNavigationOptions: {
-    //if default navigation
-    headerStyle: {
-      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "#fff"
-    },
-    headerTintColor: Platform.OS === "android" ? "#fff" : Colors.primaryColor
-  }
+  headerStyle: {
+    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "#fff"
+  },
+  headerTintColor: Platform.OS === "android" ? "#fff" : Colors.primaryColor
 };
 
 const MealsNavigator = createStackNavigator(
@@ -47,7 +42,10 @@ const MealsNavigator = createStackNavigator(
     },
     MealDetail: MealDetailScreen
   },
-  defaultStackNavigationOptions
+  {
+    // initialRouteName: 'Categories',
+    defaultNavigationOptions: defaultStackNavigationOptions
+  }
 );
 
 const FavouritesNavigator = createStackNavigator(
@@ -59,7 +57,10 @@ const FavouritesNavigator = createStackNavigator(
       screen: MealDetailScreen
     }
   },
-  defaultStackNavigationOptions
+  {
+    // initialRouteName: 'Categories',
+    defaultNavigationOptions: defaultStackNavigationOptions
+  }
 );
 
 const tabScreenConfig = {
@@ -104,13 +105,42 @@ const MealsFavTabNavigator =
         }
       });
 
-const FiltersNavigator = createStackNavigator({
-  Filters: FiltersScreen
-});
+const FiltersNavigator = createStackNavigator(
+  {
+    Filters: FiltersScreen
+  },
+  {
+    //navigationOptions: {
+    //  drawerLabel: "FILTY"
+    //},
+    defaultNavigationOptions: defaultStackNavigationOptions
+  }
+);
 
-const MainNavigator = createDrawerNavigator({
-  MealsFav: MealsFavTabNavigator,
-  Filters: FiltersNavigator
-});
+const MainNavigator = createDrawerNavigator(
+  {
+    MealsFav: {
+      screen: MealsFavTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Meals"
+      }
+    },
+    Filters: {
+      screen: FiltersNavigator,
+      navigationOptions: {
+        drawerLabel: "Filters"
+      }
+    }
+  },
+  {
+    overlayColor: "black",
+    contentOptions: {
+      activeTintColor: Colors.secondaryColor,
+      labelStyle: {
+        fontFamily: "open-sans-bold"
+      }
+    }
+  }
+);
 
 export default createAppContainer(MainNavigator);
